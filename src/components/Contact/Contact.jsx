@@ -1,7 +1,9 @@
-import { FaTimes } from 'react-icons/fa';
-import { Button, Item } from './Contact.styled';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from 'components/redux/contactsSlice';
+import { deleteContact } from 'redux/contactsSlice';
+
+import { FaTimes } from 'react-icons/fa';
+
+import { Button, Item } from './Contact.styled';
 
 export const Contact = ({ id, name, number }) => {
   const dispatch = useDispatch();
