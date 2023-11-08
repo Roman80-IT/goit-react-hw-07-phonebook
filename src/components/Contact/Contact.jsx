@@ -1,7 +1,7 @@
 import { FaTimes } from 'react-icons/fa';
 import { Button, Item } from './Contact.styled';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from 'components/redux/contactsOperationReducer';
+import { deleteContact } from 'components/redux/contactsSlice';
 
 export const Contact = ({ id, name, number }) => {
   const dispatch = useDispatch();

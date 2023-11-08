@@ -1,11 +1,13 @@
 import { useSelector } from 'react-redux';
-import { getContacts } from './redux/selectors';
+import { getContacts } from 'components/redux/selectors';
 
 import { ContactList } from './ContactList/ContactList';
 import { ContactForm } from './ContactForm/ContactForm';
+import { Filter } from './Filter/Filter';
 import { Section } from './Section/Section';
 import { Container } from './App.styled';
-import { Filter } from './Filter/Filter';
+
+// localStorage.clear(); //! Очистка `localStorage` в браузері
 
 export const App = () => {
   const contacts = useSelector(getContacts);

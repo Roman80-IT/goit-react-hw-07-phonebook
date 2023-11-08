@@ -1,6 +1,6 @@
-import { setFilter } from 'components/redux/contactsOperationReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFilter } from 'components/redux/filterSlice';
 import { getFilter } from 'components/redux/selectors';
-import { useSelector, useDispatch } from 'react-redux';
 
 export const Filter = () => {
   const dispatch = useDispatch();
@@ -8,7 +8,7 @@ export const Filter = () => {
   // const filter = useSelector(state => state.contactsOperation.filter);
 
   const handleFilterChange = event => {
-    dispatch(setFilter(event.target.value.trim()));
+    return dispatch(setFilter(event.target.value.trim()));
     // {
     // type: 'contactsOperation/setFilter',
     // payload: event.target.value.trim(),
