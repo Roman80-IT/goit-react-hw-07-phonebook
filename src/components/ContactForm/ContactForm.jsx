@@ -1,12 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getContacts } from 'redux/selectors';
 import { addContact } from 'redux/contactsSlice';
 
 import { Input, Button } from './ContactForm.styled';
+import { fetchContacts } from 'redux/contactsReducer2';
 
 export const ContactForm = () => {
+  const dispatch = useDispatch();
+
+  //! Отримаємо всі контакти з АПІ
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -36,7 +44,6 @@ export const ContactForm = () => {
   };
 
   //submit form
-  const dispatch = useDispatch();
 
   const handleSubmit = event => {
     event.preventDefault();
