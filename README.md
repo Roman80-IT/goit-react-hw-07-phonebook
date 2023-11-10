@@ -1,5 +1,7 @@
 ```jsx
 npm uninstall redux-persist
+
+npm install axios
 ```
 
 # Книга контактів
