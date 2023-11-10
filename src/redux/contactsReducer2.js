@@ -1,15 +1,28 @@
-import { createSlice, nanoid } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, nanoid } from '@reduxjs/toolkit';
+import { requestContacts } from 'services/api';
 
-// export const fetchContacts
+//! Санки:
+export const fetchContacts = createAsyncThunk(
+  'contacts/fetchAll',
+  // Параметр не передаємо, так як ми отримуємо всі контакти з API
+  async (_, thunkAPI) => {
+    try {
+      const contacts = await requestContacts();
+      console.log('contacts in Санка: ', contacts);
+
+      return contacts;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message); //
+    }
+  }
+);
+
+//     '/contacts/addContact',
+//    'contacts/deleteContact';
 
 const INITIAL_STATE = {
   contacts: {
-    items: [
-      { id: nanoid(), name: 'Rosie Simpson', number: '459-12-56' },
-      { id: nanoid(), name: 'Hermione Kline', number: '443-89-12' },
-      { id: nanoid(), name: 'Eden Clements', number: '645-17-79' },
-      { id: nanoid(), name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    items: [],
     isLoading: false,
     error: null,
   },
