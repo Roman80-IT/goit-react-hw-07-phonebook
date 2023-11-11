@@ -12,7 +12,7 @@ export const fetchContacts = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const contacts = await requestContacts();
-      console.log('contacts in Санка: ', contacts);
+      // console.log('contacts in Санка: ', contacts);
 
       return contacts;
     } catch (error) {
@@ -27,7 +27,7 @@ export const addContact = createAsyncThunk(
   async (newContact, thunkAPI) => {
     try {
       const contact = await requestAddContact(newContact);
-      console.log('AddContact in Санка: ', contact);
+      // console.log('AddContact in Санка: ', contact);
 
       return contact;
     } catch (error) {
@@ -42,7 +42,7 @@ export const deleteContact = createAsyncThunk(
   async (contactId, thunkAPI) => {
     try {
       const deletedContact = await requestDeleteContact(contactId);
-      console.log('DeletedContact in Санка: ', deletedContact);
+      // console.log('DeletedContact in Санка: ', deletedContact);
 
       return deletedContact;
     } catch (error) {

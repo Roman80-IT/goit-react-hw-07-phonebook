@@ -31,8 +31,7 @@ export const ContactList = () => {
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
-
-  console.log('contacts in ContactList: ', contacts);
+  // console.log('contacts in ContactList: ', contacts);
 
   const filteredContacts =
     contacts !== null &&

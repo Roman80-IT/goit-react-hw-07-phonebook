@@ -1,19 +1,17 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/contactsReducer2';
 
 import { Input, Button } from './ContactForm.styled';
+import { selectContacts } from 'redux/selectors';
 
 export const ContactForm = () => {
+  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
   // const [name, setName] = useState('');
   // const [number, setNumber] = useState('');
 
   // const name = useSelector(state => state.contactsOperation.name);
-
-  // const isNameHas = name => {
-  //   return contacts.some(contact => contact.name === name);
-  // };
 
   // const handleChange = ({ name, value }) => {
   //   switch (name) {
@@ -44,6 +42,15 @@ export const ContactForm = () => {
       phone,
     };
 
+    const isNameHas = name => {
+      return contacts.some(contact => contact.name === name);
+    };
+
+    if (isNameHas(name)) {
+      alert(`${name} is already in contacts.`);
+      return;
+    }
+
     dispatch(addContact(newContact));
     console.log('newContact: ', newContact);
     event.currentTarget.reset();
@@ -52,11 +59,6 @@ export const ContactForm = () => {
   //!submit form2
   // const handleSubmit = event => {
   //   event.preventDefault();
-
-  //   if (isNameHas(name)) {
-  //     alert(`${name} is already in contacts.`);
-  //     return;
-  //   }
 
   //   dispatch(addContact(name, number));
   //   reset();

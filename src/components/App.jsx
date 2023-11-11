@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { getContacts } from 'redux/selectors';
+import { selectContacts } from 'redux/selectors';
 
 import { ContactList } from './ContactList/ContactList';
 import { ContactForm } from './ContactForm/ContactForm';
@@ -7,10 +7,8 @@ import { Filter } from './Filter/Filter';
 import { Section } from './Section/Section';
 import { Container } from './App.styled';
 
-// localStorage.clear(); //! Очистка `localStorage` в браузері
-
 export const App = () => {
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
 
   return (
     <Container>
@@ -19,7 +17,7 @@ export const App = () => {
       </Section>
 
       <Section title="Contacts">
-        {contacts.length !== 0 && <Filter />}
+        {contacts !== null && contacts.length !== 0 && <Filter />}
         <ContactList />
       </Section>
     </Container>
