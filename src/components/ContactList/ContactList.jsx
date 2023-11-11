@@ -19,9 +19,8 @@ import ErrorMessage from 'components/ErrorMessage';
 
 export const ContactList = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts);
 
-  // const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
   const isLoading = useSelector(selectContactsIsLoading);
   const error = useSelector(selectContactsError);
   // const filter = useSelector(getFilter);
@@ -42,14 +41,10 @@ export const ContactList = () => {
 
       <ul>
         {contacts !== null &&
-          contacts.map(contact => {
+          contacts.map(({ id, name, phone }) => {
             return (
-              <li key={contact.id}>
-                <Contact
-                  id={contact.id}
-                  name={contact.name}
-                  number={contact.phone}
-                />
+              <li key={id}>
+                <Contact id={id} name={name} number={phone} />
               </li>
             );
           })}
@@ -57,12 +52,3 @@ export const ContactList = () => {
     </>
   );
 };
-
-// phone
-//<ul>
-//  {filteredContacts.map(contact => (
-//    <li key={contact.id}>
-//      <Contact id={contact.id} name={contact.name} number={contact.number} />
-//    </li>
-//  ))}
-//</ul>;
