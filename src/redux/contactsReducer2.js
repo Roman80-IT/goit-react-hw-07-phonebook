@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { requestContacts } from 'services/api';
+import { requestAddContact, requestContacts } from 'services/api';
 
 //! Санки:
 export const fetchContacts = createAsyncThunk(
@@ -17,7 +17,21 @@ export const fetchContacts = createAsyncThunk(
   }
 );
 
-//     '/contacts/addContact',
+export const addContact = createAsyncThunk(
+  'contacts/add',
+
+  async (newContact, thunkAPI) => {
+    try {
+      const contact = await requestAddContact(newContact);
+      console.log('AddContact in Санка: ', contact);
+
+      return contact;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message); //
+    }
+  }
+);
+
 //    'contacts/deleteContact';
 
 const INITIAL_STATE = {

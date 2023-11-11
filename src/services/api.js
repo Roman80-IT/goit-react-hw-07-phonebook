@@ -9,14 +9,12 @@ export const requestContacts = async () => {
   return data;
 };
 
-// export const requestAddContact = async newContact => {
-//   const { data } = await contactsInstance.post('/contacts', newContact);
-//   return data;
-// };
+export const requestAddContact = async newContact => {
+  const { data } = await contactsInstance.post('/contacts', newContact);
+  return data;
+};
 
-// export const requestDeleteContact = async contactId => {
-//   const { data } = await contactsInstance.delete(
-//     `/contacts/${contactId}`
-//   );
-//   return data;
-// };
+export const requestDeleteContact = async contactId => {
+  const { data } = await contactsInstance.delete(`/contacts/${contactId}`);
+  return data;
+};

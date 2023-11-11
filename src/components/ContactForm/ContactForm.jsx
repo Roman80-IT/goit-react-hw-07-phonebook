@@ -1,97 +1,93 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import {
-  selectContacts,
-  // selectContactsError,
-  // selectContactsFilterTerm,
-  // selectContactsIsLoading,
-} from 'redux/selectors';
-import { addContact } from 'redux/contactsSlice';
+import { useDispatch } from 'react-redux';
+import { addContact } from 'redux/contactsReducer2';
 
 import { Input, Button } from './ContactForm.styled';
-// import { fetchContacts } from 'redux/contactsReducer2';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts);
-  // const isLoading = useSelector(selectContactsIsLoading);
-  // const error = useSelector(selectContactsError);
-  // const filter = useSelector(selectContactsFilterTerm);
 
-  //! Отримаємо всі контакти з АПІ
-  // useEffect(() => {
-  //   dispatch(fetchContacts());
-  // }, [dispatch]);
-
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  // const [name, setName] = useState('');
+  // const [number, setNumber] = useState('');
 
   // const name = useSelector(state => state.contactsOperation.name);
 
-  const isNameHas = name => {
-    return contacts.some(contact => contact.name === name);
-  };
+  // const isNameHas = name => {
+  //   return contacts.some(contact => contact.name === name);
+  // };
 
-  const handleChange = ({ name, value }) => {
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-      case 'number':
-        setNumber(value);
-        break;
-      default:
-        break;
-    }
-  };
+  // const handleChange = ({ name, value }) => {
+  //   switch (name) {
+  //     case 'name':
+  //       setName(value);
+  //       break;
+  //     case 'number':
+  //       setNumber(value);
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // };
 
-  const reset = () => {
-    setName('');
-    setNumber('');
-  };
+  // const reset = () => {
+  //   setName('');
+  //   setNumber('');
+  // };
 
-  //submit form
-
-  const handleSubmit = event => {
+  //!submit form1
+  const handleAddContact = event => {
     event.preventDefault();
+    const name = event.currentTarget.elements.contactName.value;
+    const phone = event.currentTarget.elements.contactNumber.value;
 
-    if (isNameHas(name)) {
-      alert(`${name} is already in contacts.`);
-      return;
-    }
+    const newContact = {
+      name,
+      phone,
+    };
 
-    dispatch(addContact(name, number));
-
-    reset();
+    dispatch(addContact(newContact));
+    console.log('newContact: ', newContact);
+    event.currentTarget.reset();
   };
+
+  //!submit form2
+  // const handleSubmit = event => {
+  //   event.preventDefault();
+
+  //   if (isNameHas(name)) {
+  //     alert(`${name} is already in contacts.`);
+  //     return;
+  //   }
+
+  //   dispatch(addContact(name, number));
+  //   reset();
+  // };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleAddContact}>
       <label>
         Name
         <Input
           type="text"
-          name="name"
+          name="contactName"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           required
-          value={name}
+          // value={name}
           placeholder="Enter name"
-          onChange={event => handleChange(event.target)}
+          // onChange={event => handleChange(event.target)}
         />
       </label>
       <label>
         Number
         <Input
           type="tel"
-          name="number"
+          name="contactNumber"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           pattern="\+?\d{1,4}?[\-.\s]?\(?\d{1,3}?\)?[\-.\s]?\d{1,4}[\-.\s]?\d{1,4}[\-.\s]?\d{1,9}"
           required
           placeholder="Enter number (123-45-67)"
-          value={number}
-          onChange={event => handleChange(event.target)}
+          // value={number}
+          // onChange={event => handleChange(event.target)}
         />
       </label>
       <Button type="submit">Add contact</Button>
