@@ -44,7 +44,7 @@ export const ContactList = () => {
           contacts.map(({ id, name, phone }) => {
             return (
               <li key={id}>
-                <Contact id={id} name={name} number={phone} />
+                <Contact id={id} name={name} phone={phone} />
               </li>
             );
           })}

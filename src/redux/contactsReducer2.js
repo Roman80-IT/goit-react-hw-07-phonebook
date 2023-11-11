@@ -1,5 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { requestAddContact, requestContacts } from 'services/api';
+import {
+  requestAddContact,
+  requestContacts,
+  requestDeleteContact,
+} from 'services/api';
 
 //! Санки:
 export const fetchContacts = createAsyncThunk(
@@ -32,7 +36,20 @@ export const addContact = createAsyncThunk(
   }
 );
 
-//    'contacts/deleteContact';
+export const deleteContact = createAsyncThunk(
+  'contacts/delete',
+
+  async (contactId, thunkAPI) => {
+    try {
+      const deletedContact = await requestDeleteContact(contactId);
+      console.log('DeletedContact in Санка: ', deletedContact);
+
+      return deletedContact;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message); //
+    }
+  }
+);
 
 const INITIAL_STATE = {
   contacts: {
@@ -74,7 +91,22 @@ const contactsSlice = createSlice({
       .addCase(addContact.rejected, (state, action) => {
         state.contacts.isLoading = false;
         state.contacts.error = action.payload;
+      })
+
+      .addCase(deleteContact.pending, state => {
+        state.contacts.isLoading = true;
+        state.contacts.error = null;
+      })
+      .addCase(deleteContact.fulfilled, (state, action) => {
+        state.contacts.isLoading = false;
+        state.contacts.items = state.contacts.items.filter(
+          contact => contact.id !== action.payload.id
+        );
+      })
+      .addCase(deleteContact.rejected, (state, action) => {
+        state.contacts.isLoading = false;
+        state.contacts.error = action.payload;
       }),
 });
-// state.contacts
+
 export const contactsReducer2 = contactsSlice.reducer;
