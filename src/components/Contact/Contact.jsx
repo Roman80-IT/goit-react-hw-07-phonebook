@@ -2,17 +2,19 @@ import { useDispatch } from 'react-redux';
 import { deleteContact } from 'redux/contactsSlice';
 
 import { FaTimes } from 'react-icons/fa';
-
 import { Button, Item } from './Contact.styled';
 
-export const Contact = ({ id, name, number }) => {
+export const Contact = ({ id, name, phone }) => {
   const dispatch = useDispatch();
-  const handleDelete = () => dispatch(deleteContact(id));
+  const handleDelete = contactId => {
+    dispatch(deleteContact(contactId));
+  };
+  // const handleDelete = () => dispatch(deleteContact(id));
 
   return (
     <Item>
-      {name}: {number}
-      <Button type="button" onClick={handleDelete} title={`Delete ${name}`}>
+      {name}: {phone}
+      <Button type="button" onClick={handleDelete(id)} title={`Delete ${name}`}>
         <FaTimes />
       </Button>
     </Item>
