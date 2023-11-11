@@ -43,7 +43,9 @@ export const ContactForm = () => {
     };
 
     const isNameHas = name => {
-      return contacts.some(contact => contact.name === name);
+      return contacts.some(
+        contact => contact.name.toLowerCase() === name.toLowerCase()
+      );
     };
 
     if (isNameHas(name)) {
