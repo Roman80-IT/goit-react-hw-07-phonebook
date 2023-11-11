@@ -1,14 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilter } from 'redux/filterSlice';
-import { getFilter } from 'redux/selectors';
+import { setFilterTerm } from 'redux/contactsReducer2';
+import { selectContactsFilterTerm } from 'redux/selectors';
 
 export const Filter = () => {
   const dispatch = useDispatch();
-  const filter = useSelector(getFilter);
-  // const filter = useSelector(state => state.contactsOperation.filter);
+  const filterTerm = useSelector(selectContactsFilterTerm);
 
-  const handleFilterChange = event => {
-    return dispatch(setFilter(event.target.value.trim()));
+  const handleFilterTerm = ({ target: { value } }) => {
+    dispatch(setFilterTerm(value));
+    // const handleFilterChange = event => {
+    // return dispatch(setFilterTerm(event.target.value.trim()));
     // {
     // type: 'contactsOperation/setFilter',
     // payload: event.target.value.trim(),
@@ -21,8 +22,8 @@ export const Filter = () => {
       <input
         type="text"
         name="filter"
-        value={filter}
-        onChange={handleFilterChange}
+        value={filterTerm}
+        onChange={handleFilterTerm}
       />
     </div>
   );

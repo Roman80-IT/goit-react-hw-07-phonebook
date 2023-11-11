@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  // getFilter,
   selectContacts,
-  selectContactsError,
   selectContactsIsLoading,
+  selectContactsError,
+  selectContactsFilterTerm,
 } from 'redux/selectors';
 import { fetchContacts } from 'redux/contactsReducer2';
 import { Loader } from 'components/Loader/Loader';
@@ -23,7 +23,7 @@ export const ContactList = () => {
   const contacts = useSelector(selectContacts);
   const isLoading = useSelector(selectContactsIsLoading);
   const error = useSelector(selectContactsError);
-  // const filter = useSelector(getFilter);
+  const filterTerm = useSelector(selectContactsFilterTerm);
 
   // const filteredContacts = getFilteredContacts(contacts, filter);
 
@@ -34,14 +34,20 @@ export const ContactList = () => {
 
   console.log('contacts in ContactList: ', contacts);
 
+  const filteredContacts =
+    contacts !== null &&
+    contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filterTerm.toLowerCase().trim())
+    );
+
   return (
     <>
       {isLoading && <Loader />}
       {error && <ErrorMessage message={error} />}
 
       <ul>
-        {contacts !== null &&
-          contacts.map(({ id, name, phone }) => {
+        {filteredContacts &&
+          filteredContacts.map(({ id, name, phone }) => {
             return (
               <li key={id}>
                 <Contact id={id} name={name} phone={phone} />

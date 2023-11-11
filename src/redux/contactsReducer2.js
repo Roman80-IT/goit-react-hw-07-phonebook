@@ -8,7 +8,7 @@ import {
 //! Санки:
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
-  // Параметр не передаємо, так як ми отримуємо всі контакти з API
+  // Параметр не передаємо, оскільки ми отримуємо всі контакти з API
   async (_, thunkAPI) => {
     try {
       const contacts = await requestContacts();
@@ -16,7 +16,7 @@ export const fetchContacts = createAsyncThunk(
 
       return contacts;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message); //
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -31,7 +31,7 @@ export const addContact = createAsyncThunk(
 
       return contact;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message); //
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -46,7 +46,7 @@ export const deleteContact = createAsyncThunk(
 
       return deletedContact;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message); //
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -63,6 +63,12 @@ const INITIAL_STATE = {
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: INITIAL_STATE,
+  reducers: {
+    setFilterTerm: (state, action) => {
+      state.filter = action.payload;
+    },
+  },
+
   extraReducers: builder =>
     builder
       .addCase(fetchContacts.pending, state => {
@@ -109,4 +115,5 @@ const contactsSlice = createSlice({
       }),
 });
 
+export const { setFilterTerm } = contactsSlice.actions;
 export const contactsReducer2 = contactsSlice.reducer;
