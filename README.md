@@ -2,6 +2,8 @@
 npm uninstall redux-persist
 
 npm install axios
+
+npm install react-loader-spinner
 ```
 
 # Книга контактів

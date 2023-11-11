@@ -22,7 +22,7 @@ export const fetchContacts = createAsyncThunk(
 
 const INITIAL_STATE = {
   contacts: {
-    items: [],
+    items: null,
     isLoading: false,
     error: null,
   },
@@ -35,16 +35,16 @@ const contactsSlice = createSlice({
   extraReducers: builder =>
     builder
       .addCase(fetchContacts.pending, state => {
-        state.isLoading = true;
-        state.error = null;
+        state.contacts.isLoading = true;
+        state.contacts.error = null;
       })
       .addCase(fetchContacts.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.contacts = action.payload;
+        state.contacts.isLoading = false;
+        state.contacts.items = action.payload;
       })
       .addCase(fetchContacts.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
+        state.contacts.isLoading = false;
+        state.contacts.error = action.payload;
       }),
 });
 // state.contacts

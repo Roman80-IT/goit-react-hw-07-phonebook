@@ -1,24 +1,32 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getContacts } from 'redux/selectors';
+import {
+  selectContacts,
+  // selectContactsError,
+  // selectContactsFilterTerm,
+  // selectContactsIsLoading,
+} from 'redux/selectors';
 import { addContact } from 'redux/contactsSlice';
 
 import { Input, Button } from './ContactForm.styled';
-import { fetchContacts } from 'redux/contactsReducer2';
+// import { fetchContacts } from 'redux/contactsReducer2';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
+  const contacts = useSelector(selectContacts);
+  // const isLoading = useSelector(selectContactsIsLoading);
+  // const error = useSelector(selectContactsError);
+  // const filter = useSelector(selectContactsFilterTerm);
 
   //! Отримаємо всі контакти з АПІ
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchContacts());
+  // }, [dispatch]);
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const contacts = useSelector(getContacts);
   // const name = useSelector(state => state.contactsOperation.name);
 
   const isNameHas = name => {
