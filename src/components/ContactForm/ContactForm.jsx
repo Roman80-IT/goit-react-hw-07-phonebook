@@ -1,11 +1,11 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addContact } from 'redux/contactsReducer2';
 
 import { Input, Button } from './ContactForm.styled';
-import { selectContacts } from 'redux/selectors';
+// import { selectContacts } from 'redux/selectors';
 
 export const ContactForm = () => {
-  const contacts = useSelector(selectContacts);
+  // const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
   // const [name, setName] = useState('');
@@ -42,16 +42,16 @@ export const ContactForm = () => {
       phone,
     };
 
-    const isNameHas = name => {
-      return contacts.some(
-        contact => contact.name.toLowerCase() === name.toLowerCase()
-      );
-    };
+    // const isNameHas = name => {
+    //   return contacts.some(
+    //     contact => contact.name.toLowerCase() === name.toLowerCase()
+    //   );
+    // };
 
-    if (isNameHas(name)) {
-      alert(`${name} is already in contacts.`);
-      return;
-    }
+    // if (isNameHas(name)) {
+    //   alert(`${name} is already in contacts.`);
+    //   return;
+    // }
 
     dispatch(addContact(newContact));
     console.log('newContact: ', newContact);
