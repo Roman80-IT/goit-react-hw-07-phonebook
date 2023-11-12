@@ -11,12 +11,6 @@ import { Loader } from 'components/Loader/Loader';
 import { Contact } from 'components/Contact/Contact';
 import ErrorMessage from 'components/ErrorMessage';
 
-// const getFilteredContacts = (contacts, filter) => {
-//   return contacts.filter(contact =>
-//     contact.name.toLowerCase().includes(filter.toLowerCase())
-//   );
-// };
-
 export const ContactList = () => {
   const dispatch = useDispatch();
 
@@ -24,8 +18,6 @@ export const ContactList = () => {
   const isLoading = useSelector(selectContactsIsLoading);
   const error = useSelector(selectContactsError);
   const filterTerm = useSelector(selectContactsFilterTerm);
-
-  // const filteredContacts = getFilteredContacts(contacts, filter);
 
   //! Отримаємо всі контакти з АПІ
   useEffect(() => {

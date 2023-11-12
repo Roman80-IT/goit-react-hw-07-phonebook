@@ -8,12 +8,6 @@ export const Filter = () => {
 
   const handleFilterTerm = ({ target: { value } }) => {
     dispatch(setFilterTerm(value));
-    // const handleFilterChange = event => {
-    // return dispatch(setFilterTerm(event.target.value.trim()));
-    // {
-    // type: 'contactsOperation/setFilter',
-    // payload: event.target.value.trim(),
-    // }
   };
 
   return (
