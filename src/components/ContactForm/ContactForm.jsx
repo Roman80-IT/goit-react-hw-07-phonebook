@@ -8,25 +8,6 @@ export const ContactForm = () => {
   const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
-  // const [name, setName] = useState('');
-  // const [number, setNumber] = useState('');
-
-  // const name = useSelector(state => state.contactsOperation.name);
-
-  // const handleChange = ({ name, value }) => {
-  //   switch (name) {
-  //     case 'name':
-  //       setName(value);
-  //       break;
-  //     case 'number':
-  //       setNumber(value);
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // };
-
-  //!submit form1
   const handleAddContact = event => {
     event.preventDefault();
     const name = event.currentTarget.elements.contactName.value;
@@ -63,9 +44,7 @@ export const ContactForm = () => {
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           required
-          // value={name}
           placeholder="Enter name"
-          // onChange={event => handleChange(event.target)}
         />
       </label>
       <label>
@@ -77,8 +56,6 @@ export const ContactForm = () => {
           pattern="\+?\d{1,4}?[\-.\s]?\(?\d{1,3}?\)?[\-.\s]?\d{1,4}[\-.\s]?\d{1,4}[\-.\s]?\d{1,9}"
           required
           placeholder="Enter number (123-45-67)"
-          // value={number}
-          // onChange={event => handleChange(event.target)}
         />
       </label>
       <Button type="submit">Add contact</Button>
